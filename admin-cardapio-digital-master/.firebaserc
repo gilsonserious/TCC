@@ -1,0 +1,14 @@
+{
+  "projects": {
+    "default": "univc-digital"
+  },
+    "targets": {
+    "univc-digital": {
+      "hosting": {
+        "admin-univc-digital": [
+          "admin-univc-digital"
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,17 @@
+https://stackoverflow.com/questions/33916448/how-to-change-firebase-user-login-identity-from-command-line-cli
+
+firebase login:add
+firebase login:list
+firebase login:use
+
+firebase login:use fvc.tecnologia@gmail.com
+
+firebase login:add david@example.com
+firebase login:add alice@example.com
+firebase login:add bob@example.com
+firebase login:use alice@example.com
+firebase login:list
+firebase deploy --only hosting # deploy as alice@example.com
+
+firebase logout
+firebase login

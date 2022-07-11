@@ -1,0 +1,107 @@
+<!-- Header -->
+<ion-header [translucent]="false" collapse="undefined" mode="ios" [style.background-color]="firebase.config.color">
+  <ion-toolbar [style.background-color]="firebase.config.color">
+    <!-- <ion-buttons slot="start" (click)="fechar()">
+      <ion-button>
+        <ion-icon slot="icon-only" name="chevron-back-outline" [style.color]="firebase.config.color"> </ion-icon>
+      </ion-button>
+    </ion-buttons> -->
+
+    <ion-title size="large" style="text-align: center; font-size: 18px; " [style.color]="firebase.config.color">
+      Finalize seu agendamento
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<!-- Content -->
+<ion-content [fullscreen]="true">
+  <div id="container" *ngIf="step == 0">
+    <ion-list style="margin-top: 20px;" mode="ios">
+      <ion-list-header style="margin-bottom: 15px; color: #fff" [style.background-color]="firebase.config.color">
+        Seus itens
+      </ion-list-header>
+
+      <!-- Produtos -->
+      <ion-item *ngFor="let p of firebase.carrinho; let i = index" lines='none'>
+        <ion-row style="width: 100%;">
+          <ion-col size="4">
+            <div class="produtoImagem" [style.background]="'url(' + p.imagem + ')'"></div>
+          </ion-col>
+          <ion-col size="8">
+            <ion-label style="overflow:visible !important; color: rgb(61, 61, 61); font-size: 15px;">{{p.titulo}}
+              <ion-icon (click)="remover(i)" name="trash-outline"
+                style="color: red; margin-left: 10px; font-size: 13px"></ion-icon>
+            </ion-label>
+            <p style="color: rgb(85, 85, 85); font-size: 11px; margin-top: 0px; margin-bottom: 0px; width: 100%;">
+              {{p.descricao}}</p>
+
+          </ion-col>
+        </ion-row>
+      </ion-item>
+    </ion-list>
+  </div>
+
+  <div id="container" *ngIf="step == 1">
+    <ion-list style="margin-top: 20px;" mode="ios">
+      <ion-list-header style="margin-bottom: 15px; color: #fff" [style.background-color]="firebase.config.color">
+        Seus dados
+      </ion-list-header>
+
+      <!-- Dados -->
+      <ion-row>
+        <ion-col size="6">
+          <ion-item>
+            <ion-label position="stacked">Nome</ion-label>
+            <ion-input style=" color: black" [(ngModel)]="cliente.nome" disabled >
+              
+            </ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+    </ion-list>
+
+    <!-- Horário -->
+    <ion-list mode="ios" style="margin-top: 20px;" lines="none">
+      <ion-list-header style="margin-bottom: 15px; color: #fff" [style.background-color]="firebase.config.color">
+        Qual horário?
+      </ion-list-header>
+
+      <ion-item>
+        <ion-select style="color: black" placeholder="Escolha seu horário" value="19h as 20h20"
+          [(ngModel)]="cliente.horario">
+          <ion-select-option value="19h as 20h20">19h as 20h20</ion-select-option>
+          <ion-select-option value="20h40 as 22h">20h40 as 22h</ion-select-option>
+        </ion-select>
+      </ion-item>
+    </ion-list>
+
+
+    <!-- Dia -->
+    <ion-list mode="ios" style="margin-top: 20px;" lines="none">
+      <ion-list-header style="margin-bottom: 15px; color: #fff" [style.background-color]="firebase.config.color">
+        Qual o dia?
+      </ion-list-header>
+
+      <ion-item>
+        <ion-datetime displayFormat="DD/MM/YYYY" presentation="date" [(ngModel)]="cliente.dia"></ion-datetime>
+      </ion-item>
+    </ion-list>
+
+
+  </div>
+</ion-content>
+
+<ion-footer (click)="enviar()" *ngIf="step == 1" mode="ios">
+  <ion-toolbar>
+    <div class="footerDiv" [style.background-color]="firebase.config.color">
+      <ion-title style="color: #fff; font-size: 14px;">Enviar pedido</ion-title>
+    </div>
+  </ion-toolbar>
+</ion-footer>
+<ion-footer (click)="finalizar()" *ngIf="step == 0" mode="ios">
+  <ion-toolbar>
+    <div class="footerDiv" [style.background-color]="firebase.config.color">
+      <ion-title style="color: #fff; font-size: 14px;">Finalizar pedido</ion-title>
+    </div>
+  </ion-toolbar>
+</ion-footer>

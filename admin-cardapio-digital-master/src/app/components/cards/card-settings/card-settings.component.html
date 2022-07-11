@@ -1,0 +1,306 @@
+<div class="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-gray-200 border-0"
+  *ngIf="!listar">
+
+  <div class="rounded-t bg-white mb-0 px-6 py-6">
+    <div class="text-center flex justify-between">
+      <h6 class="text-gray-800 text-xl font-bold">Cadastrar Usuário</h6>
+      <button
+        class="bg-red-600 text-white active:bg-red-700 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 ease-linear transition-all duration-150"
+        type="button" (click)="listarUsers()" style="background-color: #002701;">
+        Listar Usuários cadastrados
+      </button>
+    </div>
+  </div>
+  <div class="flex-auto px-4 lg:px-10 py-10 pt-0">
+    <h6 class="text-gray-500 text-sm mt-3 mb-6 font-bold uppercase">
+      Dados Pessoais
+    </h6>
+    <div class="flex flex-wrap">
+      <div class="w-full lg:w-6/12 px-4">
+        <div class="relative w-full mb-3">
+          <label class="block uppercase text-gray-700 text-xs font-bold mb-2" htmlFor="grid-password">
+            Nome
+          </label>
+          <input type="text"
+            class="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150"
+            [(ngModel)]="usuario.nome" placeholder="Digite o nome do professor" />
+        </div>
+      </div>
+      <div class="w-full lg:w-6/12 px-4">
+        <div class="relative w-full mb-3">
+          <label class="block uppercase text-gray-700 text-xs font-bold mb-2" htmlFor="grid-password">
+            E-mail
+          </label>
+          <input type="email"
+            class="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150"
+            [(ngModel)]="usuario.email" placeholder="Digite o email institucional do professor" />
+        </div>
+      </div>
+      <div class="w-full lg:w-6/12 px-4">
+        <div class="relative w-full mb-3">
+          <label class="block uppercase text-gray-700 text-xs font-bold mb-2" htmlFor="grid-password">
+            Username
+          </label>
+          <input type="text" [(ngModel)]="usuario.username" placeholder="Digite o nome de usuario Ex.: GILSON.LIMA"
+            class="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150" />
+        </div>
+      </div>
+      <div class="w-full lg:w-6/12 px-4">
+        <div class="relative w-full mb-3">
+          <label class="block uppercase text-gray-700 text-xs font-bold mb-2" htmlFor="grid-password">
+            Senha
+          </label>
+          <input type="password"
+            class="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150"
+            [(ngModel)]="usuario.senha" placeholder="Digite a senha do professor" />
+        </div>
+      </div>
+    </div>
+
+    <hr class="mt-6 border-b-1 border-gray-400" />
+
+    <h6 class="text-gray-500 text-sm mt-3 mb-6 font-bold uppercase">
+      Informações de Contato
+    </h6>
+    <div class="flex flex-wrap">
+      <div class="w-full lg:w-12/12 px-4">
+        <div class="relative w-full mb-3">
+          <label class="block uppercase text-gray-700 text-xs font-bold mb-2" htmlFor="grid-password">
+            Celular
+          </label>
+          <input type="text"
+            class="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150"
+            value="Bld Mihail Kogalniceanu, nr. 8 Bl 1, Sc 1, Ap 09" [(ngModel)]="usuario.celular"
+            placeholder="Digite o celular do professor" />
+        </div>
+      </div>
+    </div>
+
+    <hr class="mt-6 border-b-1 border-gray-400" />
+
+    <h6 class="text-gray-500 text-sm mt-3 mb-6 font-bold uppercase">
+      Foto de Perfil
+    </h6>
+    <div class="flex flex-wrap">
+      <div class="w-full lg:w-12/12 px-4">
+        <div class="relative w-full mb-3">
+          <label class="block uppercase text-gray-700 text-xs font-bold mb-2" htmlFor="grid-password">
+            Foto de Perfil
+          </label>
+          <input type="file" id="file" #userPhoto (change)="onFileSelected($event)" name="image" autocomplete="off"
+            class="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150" />
+        </div>
+      </div>
+    </div>
+
+    <div class="rounded-t mb-0 px-4 py-3 border-0">
+      <div class="flex flex-wrap items-center">
+        <div class="relative w-full px-4 max-w-full flex-grow flex-1">
+          <button
+            class="univc text-white active:bg-red-700 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 ease-linear transition-all duration-150"
+            type="button" (click)="salvar()" style="margin-left: 90%; background-color: #002701;">
+            Salvar
+          </button>
+        </div>
+      </div>
+    </div>
+
+
+  </div>
+</div>
+
+<div class="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded"
+  [ngClass]="color === 'light' ? 'bg-white' : 'bg-white text-gray-800'" *ngIf="listar">
+  <div class="rounded-t mb-0 px-4 py-3 border-0">
+    <div class="flex flex-wrap items-center">
+      <div class="relative w-full px-4 max-w-full flex-grow flex-1">
+        <button
+          class="bg-green-univc text-white active:bg-red-700 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 ease-linear transition-all duration-150"
+          type="button" (click)="listar = false">
+          Voltar
+        </button>
+
+        <h3 style="margin-top: 20px;" class="font-semibold text-lg"
+          [ngClass]="color === 'light' ? 'text-gray-800' : 'text-gray-800'">
+          Usuários Cadastrados
+        </h3>
+      </div>
+    </div>
+  </div>
+  <div class="block w-full overflow-x-auto">
+    <!-- Projects table -->
+    <table class="items-center w-full bg-transparent border-collapse">
+      <thead>
+        <tr>
+          <th
+            class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-no-wrap font-semibold text-left"
+            [ngClass]="
+                  color === 'light'
+                    ? 'bg-gray-100 text-gray-600 border-gray-200'
+                    : 'bg-red-800 text-red-300 border-red-700'
+                ">
+            Usuário
+          </th>
+          <th
+            class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-no-wrap font-semibold text-left"
+            [ngClass]="
+                  color === 'light'
+                    ? 'bg-gray-100 text-gray-600 border-gray-200'
+                    : 'bg-red-800 text-red-300 border-red-700'
+                ">
+            Username
+          </th>
+          <th
+            class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-no-wrap font-semibold text-left"
+            [ngClass]="
+                  color === 'light'
+                    ? 'bg-gray-100 text-gray-600 border-gray-200'
+                    : 'bg-red-800 text-red-300 border-red-700'
+                ">
+            E-mail
+          </th>
+          <th
+            class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-no-wrap font-semibold text-left"
+            [ngClass]="
+                  color === 'light'
+                    ? 'bg-gray-100 text-gray-600 border-gray-200'
+                    : 'bg-red-800 text-red-300 border-red-700'
+                ">
+            Celular
+          </th>
+          <th
+            class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-no-wrap font-semibold text-left"
+            [ngClass]="
+                  color === 'light'
+                    ? 'bg-gray-100 text-gray-600 border-gray-200'
+                    : 'bg-red-800 text-red-300 border-red-700'
+                "></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let p of usuarios">
+          <th
+            class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-no-wrap p-4 text-left flex items-center">
+            <img [src]="p.imagem" class="h-12 w-12 bg-white rounded-full border" alt="..." />
+            <span class="ml-3 font-bold" [ngClass]="color === 'light' ? 'text-gray-700' : 'text-white'">
+              {{p.nome}}
+            </span>
+          </th>
+          <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-no-wrap p-4">
+            {{p.username}}
+          </td>
+          <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-no-wrap p-4">
+            {{p.email}}
+          </td>
+          <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-no-wrap p-4">
+            <div class="flex items-center">
+              <span class="mr-2">{{p.celular}}</span>
+            </div>
+          </td>
+          <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-no-wrap p-4 text-right">
+
+            <button
+              class="bg-indigo-500 text-white active:bg-indigo-600 text-xs font-bold uppercase px-3 py-1 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+              type="button" style="background: rgb(1, 54, 20);" (click)="testandoo(p.id)">
+              <i class="fa fa-user" aria-hidden="true"></i>
+
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- <div class="w-full lg:w-4/12 px-4">
+
+    <div *ngIf="perfil">
+
+      <div class="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-xl rounded-lg mt-16"
+        *ngFor="let p of dados">
+
+        <div class="px-6">
+
+
+
+          <div class="flex flex-wrap justify-center">
+
+            <div class="w-full px-4 flex justify-center">
+              <div class="relative">
+
+                <img alt="..." [src]="p.imagem"
+                  class="shadow-xl rounded-full h-auto align-middle border-none absolute -m-16 -ml-20 lg:-ml-16 max-w-150-px" />
+              </div>
+            </div>
+          </div>
+
+          <div class="w-full px-4 text-center mt-20">
+
+            <span class="text-xl font-bold block uppercase tracking-wide text-gray-700">
+              Quantidade de Agendamentos
+            </span>
+
+            <div class="flex justify-center py-4 lg:pt-4 pt-8">
+
+              <div class="mr-4 p-3 text-center">
+                <span class="text-xl font-bold block uppercase tracking-wide text-gray-700">
+                  22
+                </span>
+                <span class="text-sm text-gray-500">Datashow</span>
+              </div>
+              <div class="mr-4 p-3 text-center">
+                <span class="text-xl font-bold block uppercase tracking-wide text-gray-700">
+                  10
+                </span>
+                <span class="text-sm text-gray-500">Notebook</span>
+              </div>
+              <div class="lg:mr-4 p-3 text-center">
+                <span class="text-xl font-bold block uppercase tracking-wide text-gray-700">
+                  89
+                </span>
+                <span class="text-sm text-gray-500">Webcam</span>
+              </div>
+            </div>
+          </div>
+
+
+          <div class="text-center mt-12">
+            <h3 class="text-xl font-semibold leading-normal mb-2 text-gray-800 mb-2">
+              {{p.nome}}
+            </h3>
+            <div class="text-sm leading-normal mt-0 mb-2 text-gray-500 font-bold uppercase">
+              <i class="fa fa-user mr-2 text-lg text-gray-500"></i>
+              {{p.username}}
+            </div>
+            <div class="mb-2 text-gray-700 mt-10">
+              <i class="fa fa-envelope-o mr-2 text-lg text-gray-500"></i>
+              {{p.email}}
+            </div>
+            <div class="mb-2 text-gray-700">
+              <i class="fa fa-mobile mr-2 text-lg text-gray-500"></i>
+              {{p.celular}}
+            </div>
+          </div>
+          <div class="mt-10 py-10 border-t border-gray-300 text-center">
+            <div class="flex flex-wrap justify-center">
+              <div class="w-full lg:w-9/12 px-4">
+                <p class="mb-4 text-lg leading-relaxed text-gray-800">
+                  An artist of considerable range, Jenna the name taken by
+                  Melbourne-raised, Brooklyn-based Nick Murphy writes, performs and
+                  records all of his own music, giving it a warm, intimate feel with a
+                  solid groove structure. An artist of considerable range.
+                </p>
+                <button
+                  class="bg-green-univc text-white active:bg-red-700 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 ease-linear transition-all duration-150"
+                  type="button" (click)="perfil = false">
+                  Voltar
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div> 
+
+  </div>-->
